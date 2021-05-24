@@ -1,6 +1,12 @@
 spring:
   data:
     mongodb:
+      uri: mongodb://127.0.0.1:27017
       host: localhost
       port: 27017
       database: eximbay
+      authentication-database: admin
+      username: root
+      password: root
+
+
