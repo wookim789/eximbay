@@ -19,7 +19,7 @@ public class WookimApplication {
         config.put("bootstrap.servers", "localhost:9092");
         config.put("group.id", "sales_group");
         config.put("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
-        config.put("values.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
+        config.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
 
         KafkaConsumer<String, String> consumer = new KafkaConsumer<String, String>(config);
 
