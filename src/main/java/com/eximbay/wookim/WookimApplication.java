@@ -1,5 +1,7 @@
 package com.eximbay.wookim;
 
+import com.eximbay.wookim.document.SalesDoc;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
@@ -25,11 +27,32 @@ public class WookimApplication {
 
         consumer.subscribe(Arrays.asList("sales"));
 
+        ObjectMapper mapper = new ObjectMapper();
         while(true){
             ConsumerRecords<String, String> records = consumer.poll(500);
             for(ConsumerRecord<String, String> record: records){
-                System.out.println(record.value());
+//                System.out.println(record.value());
+                try{
+                    SalesDoc doc = mapper.readValue(record.value(), SalesDoc.class);
+                }catch (Exception e){
+
+                }
             }
         }
+    }
+
+    private void printJson(){
+//        {
+//            "id": 1,
+//                "title": "title1",
+//                "interfaceType": "api",
+//                "price": "1000",
+//                "regDate": "",
+//                "modDate": ""
+//        }
+        Integer id = 1;
+        String title = "title" + id;
+        String interfaceType = "api";
+
     }
 }

@@ -9,11 +9,9 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-//@RequiredArgsConstructor
+@RequiredArgsConstructor
 public class SalesService {
-//    private final SalesRepo salesRepo;
-    @Autowired
-    private SalesRepo salesRepo;
+    private final SalesRepo salesRepo;
 
     public List<SalesDoc> getSales(String title) throws Exception{
         return salesRepo.findByTitle(title);
