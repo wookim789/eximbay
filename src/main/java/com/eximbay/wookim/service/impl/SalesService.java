@@ -1,4 +1,4 @@
-package com.eximbay.wookim.service;
+package com.eximbay.wookim.service.impl;
 
 import com.eximbay.wookim.document.SalesDoc;
 import com.eximbay.wookim.repository.SalesRepo;

@@ -1,28 +1,28 @@
-package com.eximbay.wookim.schedule;
+package com.eximbay.wookim.service.impl;
 
 import com.eximbay.wookim.document.SalesDoc;
 import com.eximbay.wookim.repository.SalesRepo;
+import com.eximbay.wookim.service.KafkaService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
-import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 
-@EnableScheduling
+@Service
 @RequiredArgsConstructor
-@EnableMongoRepositories
-@EnableAutoConfiguration
-public class Schedule {
+public class KafkaServiceImpl implements KafkaService {
     private final SalesRepo repo;
 
-    @Scheduled(fixedRate = 5000)
     public void reportCurrentTime() {
         ObjectMapper mapper = new ObjectMapper();
         Properties config = new Properties();
@@ -47,6 +47,24 @@ public class Schedule {
                     e.printStackTrace();
                 }
             }
+        }
+    }
+
+    private static void printJson(ObjectMapper mapper) throws Exception{
+        for(int id = 0; id < 1000; id++){
+            String title = "title" + id;
+            String interfaceType = "api";
+            String price = Integer.toString(1000 + id * 5);
+            String regDate = LocalDateTime.now().format(DateTimeFormatter.ISO_DATE);
+
+            Map<String, Object> map = new HashMap<>();
+
+            map.put("id", id);
+            map.put("title", title);
+            map.put("interfaceType", interfaceType);
+            map.put("price", price);
+            map.put("regDate", regDate);
+            System.out.println(mapper.writeValueAsString(map));
         }
     }
 }
