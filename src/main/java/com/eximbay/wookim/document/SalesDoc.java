@@ -23,4 +23,16 @@ public class SalesDoc {
     private Date regDate;
     @DateTimeFormat(iso = ISO.DATE_TIME)
     private Date modDate;
+
+    @Override
+    public String toString(){
+        String memberInfoStr = "{id : " + this.id
+                + ", \n title : " + this.title
+                + ", \n interfaceType : " + this.interfaceType
+                + ", \n price : " + this.price
+                + ", \n regDate : " + this.regDate
+                + ", \n modDate : " + this.modDate
+                + "}";
+        return memberInfoStr;
+    }
 }
