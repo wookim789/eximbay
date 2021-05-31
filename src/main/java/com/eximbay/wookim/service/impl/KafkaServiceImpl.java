@@ -23,6 +23,7 @@ import java.util.Properties;
 public class KafkaServiceImpl implements KafkaService {
     private final SalesRepo repo;
 
+    // 프로젝트보다 알고리즘과 데이터 구조에 대해 공부해보자
     public void reportCurrentTime() {
         ObjectMapper mapper = new ObjectMapper();
         Properties config = new Properties();
